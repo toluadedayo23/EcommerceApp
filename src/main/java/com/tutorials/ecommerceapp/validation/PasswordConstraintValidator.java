@@ -1,4 +1,4 @@
-package com.practise.luteat.customValidator;
+package com.tutorials.ecommerceapp.validation;
 
 import lombok.SneakyThrows;
 import org.passay.*;
