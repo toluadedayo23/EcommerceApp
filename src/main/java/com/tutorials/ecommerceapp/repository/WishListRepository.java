@@ -1,7 +1,14 @@
 package com.tutorials.ecommerceapp.repository;
 
+import com.tutorials.ecommerceapp.model.User;
 import com.tutorials.ecommerceapp.model.WishList;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface WishRepository extends JpaRepository<WishList, Long> {
+import java.util.List;
+
+public interface WishListRepository extends JpaRepository<WishList, Long> {
+
+    List<WishList> findAllByUserAndOrderByCreatedDateDesc(User user);
+
+    List<WishList> findAllByUser(User user);
 }
