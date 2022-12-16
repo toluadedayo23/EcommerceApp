@@ -1,2 +1,9 @@
-package com.tutorials.ecommerceapp.mapper;public class WishListMapper {
+package com.tutorials.ecommerceapp.mapper;
+
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+public class WishListMapper {
+
+
 }
