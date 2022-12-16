@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/api/cart")
 @AllArgsConstructor
 public class CartController {
     private final CartService cartService;
