@@ -1,5 +1,6 @@
 package com.tutorials.ecommerceapp.exception.globalHandler;
 
+import com.stripe.exception.StripeException;
 import com.tutorials.ecommerceapp.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -95,5 +96,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus status = HttpStatus.NOT_FOUND;
         log.error("Invalid Refresh Token");
         return new ErrorResponse(status, refreshTokenException.getMessage());
+    }
+
+    @ExceptionHandler(StripeException.class)
+    public ErrorResponse handleStripeException(Exception e){
+        StripeException stripeException = (StripeException) e;
+        HttpStatus status = HttpStatus.valueOf(stripeException.getStatusCode());
+        log.error("Stripe Exception");
+        return new ErrorResponse(status, stripeException.getMessage());
     }
 }
