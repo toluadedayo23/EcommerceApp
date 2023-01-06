@@ -105,4 +105,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("Stripe Exception");
         return new ErrorResponse(status, stripeException.getMessage());
     }
+
+    @ExceptionHandler(OrderException.class)
+    public ErrorResponse handleOrderException(Exception e){
+        OrderException orderException = (OrderException) e;
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        log.error("Cart is empty");
+        return new ErrorResponse(status, orderException.getMessage());
+    }
 }
