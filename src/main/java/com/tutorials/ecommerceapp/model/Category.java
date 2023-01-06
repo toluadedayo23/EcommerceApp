@@ -29,7 +29,7 @@ public class Category {
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    Set<Product> products;
+    private Set<Product> products;
 
     public Category() {
     }
