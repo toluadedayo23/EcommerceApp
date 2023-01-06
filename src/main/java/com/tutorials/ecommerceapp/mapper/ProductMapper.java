@@ -14,9 +14,9 @@ public interface ProductMapper {
     @Mapping(target = "id", ignore = true)
     Product map(ProductDto productDto);
 
-    @Mapping(target = "name", expression = "java(wishList.product.getName())")
-    @Mapping(target = "imageURL", expression = "java(wishList.product.getImageURL())")
-    @Mapping(target = "description", expression = "java(wishList.product.getDescription())")
-    @Mapping(target = "price", expression = "java(wishList.product.getPrice())")
+    @Mapping(target = "name", expression = "java(wishList.getProduct().getName())")
+    @Mapping(target = "imageURL", expression = "java(wishList.getProduct().getImageURL())")
+    @Mapping(target = "description", expression = "java(wishList.getProduct().getDescription())")
+    @Mapping(target = "price", expression = "java(wishList.getProduct().getPrice())")
     ProductDto mapWishListToProduct(WishList wishList);
 }
