@@ -49,7 +49,7 @@ public class WishListServiceImpl implements WishListService {
     @Override
     public List<ProductDto> getWishList() {
 
-        List<WishList> wishLists = wishListRepository.findAllByUserAndOrderByCreatedDateDesc(authService.getCurrentUser());
+        List<WishList> wishLists = wishListRepository.findAllByUserOrderByCreatedDateDesc(authService.getCurrentUser());
 
         return wishLists.stream()
                 .map(productMapper::mapWishListToProduct)
