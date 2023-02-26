@@ -2,18 +2,21 @@ package com.tutorials.ecommerceapp.service;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
-import com.tutorials.ecommerceapp.dto.checkout.CheckoutItemDto;
+import com.tutorials.ecommerceapp.dto.checkout.CreateCheckoutDto;
+import com.tutorials.ecommerceapp.dto.order.CreateOrderDto;
 import com.tutorials.ecommerceapp.dto.order.OrderDto;
+import org.springframework.data.jpa.repository.Query;
 
+import javax.persistence.Tuple;
 import java.util.List;
 
 public interface OrderService {
 
-    Session createCheckoutSession(List<CheckoutItemDto> checkoutItemDtoList) throws StripeException;
+    Session createCheckoutSession(CreateCheckoutDto createCheckoutDto) throws StripeException;
 
-    void createOrder(OrderDto orderDto);
+    void createOrder(CreateOrderDto orderDto);
 
-    void getAllOrders(Long userId);
+    List<OrderDto> getLastTenOrders(Long userId);
 
-    void getOrder(Long orderId);
+    List<OrderDto> getOrder(Long orderId, Long userId);
 }
