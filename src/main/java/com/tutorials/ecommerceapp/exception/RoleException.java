@@ -10,7 +10,7 @@ public class RoleException extends RuntimeException {
     private Object fieldName;
 
     public RoleException(String resourceName, Object fieldName){
-        super(String.format("%s: %s not found"));
+        super(String.format("%s: %s not found", resourceName, fieldName));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
     }

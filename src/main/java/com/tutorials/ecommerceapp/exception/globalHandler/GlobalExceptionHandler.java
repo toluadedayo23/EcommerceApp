@@ -2,12 +2,21 @@ package com.tutorials.ecommerceapp.exception.globalHandler;
 
 import com.stripe.exception.StripeException;
 import com.tutorials.ecommerceapp.exception.*;
+import com.tutorials.ecommerceapp.exception.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 @Slf4j
@@ -106,6 +115,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ErrorResponse(status, stripeException.getMessage());
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    public ErrorResponse handleAccessDeniedException(AccessDeniedException e) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        log.error("User does not have the proper permission to access this resource");
+        return new ErrorResponse(status, e.getMessage());
+    }
+
     @ExceptionHandler(OrderException.class)
     public ErrorResponse handleOrderException(Exception e){
         OrderException orderException = (OrderException) e;
@@ -113,4 +129,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("Cart is empty");
         return new ErrorResponse(status, orderException.getMessage());
     }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String errorMessage = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        List<String> validationList = ex.getBindingResult().getFieldErrors().stream().map(fieldError -> fieldError.getDefaultMessage()).collect(Collectors.toList());
+        log.error("Validation error: " + validationList);
+        return new ResponseEntity<>(new ErrorResponse(status, errorMessage), status);
+    }
+//
+//    @ExceptionHandler(Exception.class)
+//    public ErrorResponse handleException(Exception e) {
+//
+//        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+//
+//        log.error("Internal Error");
+//
+//        return new ErrorResponse(status, e.getMessage());
+//    }
 }

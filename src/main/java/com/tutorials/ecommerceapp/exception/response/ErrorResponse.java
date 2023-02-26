@@ -1,4 +1,4 @@
-package com.tutorials.ecommerceapp.exception;
+package com.tutorials.ecommerceapp.exception.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
