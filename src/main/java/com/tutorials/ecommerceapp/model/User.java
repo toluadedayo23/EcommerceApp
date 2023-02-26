@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Set;
 
@@ -32,6 +34,7 @@ public class User {
     private String email;
 
     @Column(name = "password")
+    @NotEmpty(message = "password cannot be empty")
     private String password;
 
     @JoinTable(name = "user_role",
@@ -40,10 +43,4 @@ public class User {
     )
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> role;
-
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.LAZY)
-    private List<Order> orders;
 }

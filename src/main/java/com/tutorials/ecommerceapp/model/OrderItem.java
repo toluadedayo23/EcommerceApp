@@ -22,9 +22,10 @@ public class OrderItem {
 
     private Double price;
 
+    @Temporal(TemporalType.DATE)
     private Date createdDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", referencedColumnName = "orderId")
     private Order order;
 
