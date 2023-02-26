@@ -1,31 +1,36 @@
 package com.tutorials.ecommerceapp.controller;
 
-import com.tutorials.ecommerceapp.dto.ProductDto;
+import com.tutorials.ecommerceapp.dto.product.ProductDto;
+import com.tutorials.ecommerceapp.dto.product.UpdateProductDto;
 import com.tutorials.ecommerceapp.service.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/product/")
 @AllArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
 
     @PostMapping
-    public ProductDto createProduct(@RequestBody ProductDto productDto){
+    @PreAuthorize("hasRole('ADMIN')")
+    public ProductDto createProduct(@Valid @RequestBody ProductDto productDto){
         return productService.createProduct(productDto);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<ProductDto> getAllProducts(){
         return productService.getAllProducts();
     }
 
-    @PutMapping("/update")
-    public ProductDto updateProduct(@RequestBody ProductDto productDto){
-        return productService.updateProduct(productDto);
+    @PutMapping("update")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ProductDto updateProduct(@Valid @RequestBody UpdateProductDto updateProductDto){
+        return productService.updateProduct(updateProductDto);
     }
 }

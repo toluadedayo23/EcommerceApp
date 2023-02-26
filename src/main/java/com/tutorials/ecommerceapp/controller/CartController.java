@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/cart")
+@RequestMapping("/api/cart/")
 @AllArgsConstructor
 public class CartController {
     private final CartService cartService;
 
     @PostMapping
-    public ResponseEntity<String> addToCart(@RequestBody AddToCartDto addToCartDto){
+    public ResponseEntity<String> addToCart(@Valid @RequestBody AddToCartDto addToCartDto){
         cartService.addToCart(addToCartDto);
-        return new ResponseEntity<String>("Product successfully added to cart", HttpStatus.CREATED);
+        return new ResponseEntity<>("Product successfully added to cart", HttpStatus.CREATED);
     }
 
     @GetMapping()
@@ -28,19 +28,19 @@ public class CartController {
         return ResponseEntity.status(HttpStatus.OK).body(cartService.viewCart());
     }
 
-    @DeleteMapping("/removeItemFromCart/{id}")
+    @DeleteMapping("removeItemFromCart/{id}")
     public ResponseEntity<String> removeItemFromCart(@PathVariable("id") Long cartId){
         cartService.removeItemFromCart(cartId);
         return new ResponseEntity<String>("Item successfully removed", HttpStatus.OK);
     }
 
-    @PutMapping("/updateCart")
+    @PutMapping("updateCart")
     public ResponseEntity<String> updateCart(@RequestBody @Valid UpdateCart updateCart){
         cartService.updateCart(updateCart);
-        return new ResponseEntity<String>("Item successfully updated", HttpStatus.OK);
+        return new ResponseEntity<>("Item successfully updated", HttpStatus.OK);
     }
 
-    @DeleteMapping("/clearCart")
+    @DeleteMapping("clearCart")
     public ResponseEntity<String> clearCart(){
         cartService.clearCart();
         return new ResponseEntity<String>("Cart cleared", HttpStatus.OK);
