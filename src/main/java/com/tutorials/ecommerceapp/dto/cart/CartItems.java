@@ -1,6 +1,6 @@
 package com.tutorials.ecommerceapp.dto.cart;
 
-import com.tutorials.ecommerceapp.dto.ProductDto;
+import com.tutorials.ecommerceapp.dto.product.ProductDto;
 import lombok.Data;
 
 @Data

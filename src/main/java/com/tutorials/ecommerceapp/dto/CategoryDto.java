@@ -1,11 +1,9 @@
 package com.tutorials.ecommerceapp.dto;
 
-import com.tutorials.ecommerceapp.dto.ProductDto;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import java.util.Set;
 
 @Data
 public class CategoryDto {
@@ -14,6 +12,7 @@ public class CategoryDto {
     private String categoryName;
 
     @NotBlank
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String newCategoryName;
 
     @NotBlank
@@ -21,8 +20,5 @@ public class CategoryDto {
 
     @NotBlank
     private String imageUrl;
-
-    @NotEmpty
-    Set<ProductDto> products;
 
 }

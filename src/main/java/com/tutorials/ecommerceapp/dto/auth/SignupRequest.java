@@ -1,4 +1,4 @@
-package com.tutorials.ecommerceapp.dto;
+package com.tutorials.ecommerceapp.dto.auth;
 
 import com.tutorials.ecommerceapp.model.ERole;
 import com.tutorials.ecommerceapp.validation.Password;

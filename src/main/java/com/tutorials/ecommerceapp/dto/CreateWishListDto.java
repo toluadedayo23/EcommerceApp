@@ -2,13 +2,13 @@ package com.tutorials.ecommerceapp.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotEmpty;
 
 @Data
-@AllArgsConstructor
 public class CreateWishListDto {
 
-    @NotEmpty
+    @Range(min = 1, message = "productId cannot be lesser than 1")
     private Long productId;
 }
