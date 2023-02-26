@@ -1,7 +1,7 @@
 package com.tutorials.ecommerceapp.service.impl;
 
 import com.tutorials.ecommerceapp.dto.CreateWishListDto;
-import com.tutorials.ecommerceapp.dto.ProductDto;
+import com.tutorials.ecommerceapp.dto.product.ProductDto;
 import com.tutorials.ecommerceapp.exception.ProductException;
 import com.tutorials.ecommerceapp.exception.WishListException;
 import com.tutorials.ecommerceapp.mapper.ProductMapper;
