@@ -1,7 +1,7 @@
 package com.tutorials.ecommerceapp.service;
 
 import com.tutorials.ecommerceapp.dto.CreateWishListDto;
-import com.tutorials.ecommerceapp.dto.ProductDto;
+import com.tutorials.ecommerceapp.dto.product.ProductDto;
 
 import java.util.List;
 
