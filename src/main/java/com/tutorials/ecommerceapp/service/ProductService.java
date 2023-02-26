@@ -1,6 +1,7 @@
 package com.tutorials.ecommerceapp.service;
 
-import com.tutorials.ecommerceapp.dto.ProductDto;
+import com.tutorials.ecommerceapp.dto.product.ProductDto;
+import com.tutorials.ecommerceapp.dto.product.UpdateProductDto;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ public interface ProductService {
 
     List<ProductDto> getAllProducts();
 
-    ProductDto updateProduct(ProductDto productDto);
+    ProductDto updateProduct(UpdateProductDto updateProductDto);
 }
