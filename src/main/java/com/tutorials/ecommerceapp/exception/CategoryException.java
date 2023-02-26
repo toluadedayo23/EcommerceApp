@@ -11,7 +11,7 @@ public class CategoryException extends RuntimeException {
     private Object fieldValue;
 
     public CategoryException(String resourceName, Object fieldValue) {
-        super(String.format("%s with Category Name: %s not found", resourceName, fieldValue));
+        super(String.format("%s with Category ID: %s not found", resourceName, fieldValue));
         this.resourceName = resourceName;
         this.fieldValue = fieldValue;
     }
