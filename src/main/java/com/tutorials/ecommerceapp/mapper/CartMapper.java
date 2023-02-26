@@ -1,6 +1,6 @@
 package com.tutorials.ecommerceapp.mapper;
 
-import com.tutorials.ecommerceapp.dto.ProductDto;
+import com.tutorials.ecommerceapp.dto.product.ProductDto;
 import com.tutorials.ecommerceapp.dto.cart.CartItems;
 import com.tutorials.ecommerceapp.model.Cart;
 import org.mapstruct.Mapper;
