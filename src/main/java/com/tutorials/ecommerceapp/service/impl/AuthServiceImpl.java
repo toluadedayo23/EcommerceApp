@@ -1,9 +1,9 @@
 package com.tutorials.ecommerceapp.service.impl;
 
-import com.tutorials.ecommerceapp.dto.AuthenticationResponse;
-import com.tutorials.ecommerceapp.dto.LoginRequest;
-import com.tutorials.ecommerceapp.dto.RefreshTokenRequest;
-import com.tutorials.ecommerceapp.dto.SignupRequest;
+import com.tutorials.ecommerceapp.dto.auth.AuthenticationResponse;
+import com.tutorials.ecommerceapp.dto.auth.LoginRequest;
+import com.tutorials.ecommerceapp.dto.auth.RefreshTokenRequest;
+import com.tutorials.ecommerceapp.dto.auth.SignupRequest;
 import com.tutorials.ecommerceapp.exception.RoleException;
 import com.tutorials.ecommerceapp.exception.UserException;
 import com.tutorials.ecommerceapp.model.ERole;
@@ -23,7 +23,10 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -114,13 +117,16 @@ public class AuthServiceImpl implements AuthService {
         );
     }
 
+
     @Override
     public User getCurrentUser() {
 
-        Jwt principal = (Jwt) SecurityContextHolder
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
 
-        return userRepository.findByUsername(principal.getSubject())
-                .orElseThrow(() -> new UserException("User", principal.getSubject()));
+        User user = new User(null, principal.getUsername(), null, null, null, null, null);
+
+        return userRepository.findByUsername(user.getUsername())
+                .orElseThrow(() -> new UserException("User", user.getUsername()));
     }
 }
