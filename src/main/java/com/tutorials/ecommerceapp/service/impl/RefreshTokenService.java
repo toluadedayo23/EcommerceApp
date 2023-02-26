@@ -1,6 +1,6 @@
 package com.tutorials.ecommerceapp.service.impl;
 
-import com.tutorials.ecommerceapp.dto.RefreshTokenRequest;
+import com.tutorials.ecommerceapp.dto.auth.RefreshTokenRequest;
 import com.tutorials.ecommerceapp.exception.RefreshTokenException;
 import com.tutorials.ecommerceapp.model.RefreshToken;
 import com.tutorials.ecommerceapp.repository.RefreshTokenRepository;
